@@ -7,6 +7,7 @@ module.exports = {
     description: 'Reads aloud a message in text-to-speech',
     parameters: '[message]',
     execute(msg, args) {
+
       const googleTTS = require('google-tts-api');
       if (args[2] != undefined) {
         var valueList = []
@@ -28,7 +29,7 @@ module.exports = {
         msg.channel.send(embed)
       }
       const url = googleTTS.getAudioUrl(messageTTS, {
-        lang: 'en',
+        lang: 'de',
         slow: false,
         host: 'https://translate.google.com',
       });
@@ -37,7 +38,16 @@ module.exports = {
         try {
           let pipedFile = response.pipe(file)
           pipedFile.on('finish', () => {
-            msg.channel.send({files: ["./commands/message.ogg"]})
+            if (msg.member.voice.channel) {
+              testFunction = async function() {
+                const connection = await msg.member.voice.channel.join();
+                var dispatcher = connection.play('./commands/message.ogg')
+              }
+              testFunction()
+            } else {
+              message.reply('You need to join a voice channel first!');
+              return
+            }
           })
         } catch (error) {
           console.error(error)
