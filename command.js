@@ -7,7 +7,8 @@ test1 = {
     KeywordAdd: require('./commands/keyword'),
     KeywordRemove: require('./commands/keywords/remove'),
     KeywordList: require('./commands/keywords/list'),
-    TTS: require('./commands/tts')
+    TTS: require('./commands/tts'),
+    Leave: require('./commands/leave')
 };
 
 module.exports.test1 = test1;

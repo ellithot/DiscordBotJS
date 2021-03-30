@@ -12,7 +12,8 @@ test = Object.keys(botCommands).map(key => {
 bot.on('message', msg => {
     //If the message was sent by a bot, don't bother
     if (msg.author.bot) return;
-    keywordCheck.Check(msg)
+    const args = msg.content.split(/ +/);
+    keywordCheck.Check(msg,args)
     if (msg.content == '!jm') {
       var embed = new Discord.MessageEmbed()
       .setTitle('About Joe Mama:')
@@ -22,15 +23,13 @@ bot.on('message', msg => {
       .setColor('#b0b0b0')
       msg.channel.send(embed)
     } 
-    //If the message doesn't start with !jm, don't bother
+
     if (!msg.content.startsWith('!jm ')) return;
-    //split the message into different words, check the 2nd for the command & assigns it a variable
-    const args = msg.content.split(/ +/);
     const command = args[1].toLowerCase();
   
     if (!bot.commands.has(command)) {
       var embed = new Discord.MessageEmbed()
-      .setTitle("Hmmm, that's not a command. Did you make a typo?")
+      .setAuthor("Hmmm, that's not a command. Did you make a typo?")
       msg.channel.send(embed)
       return
     }
