@@ -9,6 +9,8 @@ module.exports = {
     parameters: '[optional:language] [message]',
     execute(msg, args) {
 
+      const languages = ['af','sq','ar','hy','az','eu','be','bg','ca','zh-CN','zh-TW','hr','cs','da','nl','en','en','et','tl','fi','fr','gl','ka','de','el','ht','iw','hi','hu','is','id','ga','it','ja','ko','lv','lt','mk','ms','mt','no','fa','pl','pt','ro','ru','sr','sk','sl','es','sw','sv','th','tr','uk','ur','vi','cy','yi']
+
       if (args[2].startsWith('language:')) {
         var firstMessage = 3
         var wholeLang = args[2];
@@ -53,7 +55,7 @@ module.exports = {
         tempVar = url
       } catch {
         const url = googleTTS.getAudioUrl(messageTTS, {
-          lang: 'en',
+          lang: setLang,
           slow: false,
           host: 'https://translate.google.com',
         });
