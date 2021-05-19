@@ -8,7 +8,8 @@ test1 = {
     KeywordRemove: require('./commands/keywords/remove'),
     KeywordList: require('./commands/keywords/list'),
     TTS: require('./commands/tts'),
-    Leave: require('./commands/leave')
+    Leave: require('./commands/leave'),
+    Hltv: require('./commands/hltv')
 };
 
 module.exports.test1 = test1;
