@@ -26,26 +26,25 @@ module.exports = {
                 var team2List = ''
                 var team1List = ''
                 var team1Name = '   '
-                var team1Name = ''
+                var team2Name = ''
                 HLTV.getTeam({ id: teamList[Math.floor(args[2] / 2)] }).then((res) => {
                     console.log(res)
-                    var team1Name = res.name
+                    team1Name = res.name
                     for (i = 0; i < 5; i++) {
-                        team1List += res.players[i] + '\n'
+                        team1List += res.players[i].name + '\n'
                     }
                 }).then(() => {
                     HLTV.getTeam({ id: teamList[Math.floor(args[2] / 2) + 'a'] }).then((res) => {
                         console.log(res)
-                        var team2Name = res.name
+                        team2Name = res.name
                         for (i = 0; i < 5; i++) {
-                            team2List += res.players[i] + '\n'
+                            team2List += res.players[i].name + '\n'
                         }
+                        var playerEmbed = new discord.MessageEmbed()
+                            .addField(team1Name, team1List, true)
+                            .addField(team2Name, team2List, true)
+                        msg.channel.send(playerEmbed)
                     })
-                }).then(() => {
-                    var playerEmbed = new discord.MessageEmbed()
-                        .addField('team1Name', team1List, true)
-                        .addField('team2Name', team2List, true)
-                    msg.channel.send(playerEmbed)
                 })
 
 
