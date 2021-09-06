@@ -4,9 +4,6 @@ test1 = {
     Ping: require('./commands/ping'),
     Avatar: require('./commands/avatar'),
     Help: require('./commands/help'),
-    KeywordAdd: require('./commands/keyword'),
-    KeywordRemove: require('./commands/keywords/remove'),
-    KeywordList: require('./commands/keywords/list'),
     TTS: require('./commands/tts'),
     Leave: require('./commands/leave'),
     Hltv: require('./commands/hltv')
