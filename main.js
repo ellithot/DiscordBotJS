@@ -6,8 +6,13 @@ const botCommands = commands.test1
 const { HLTV } = require('hltv')
 
 HLTV.getMatches().then((res) => {
-    console.log(res[0].event.id)
+  console.log(res.length)
 })
+
+/* var requestLoop = setInterval(function(){
+  
+}, 600000); */
+
 
 
 var likeData
@@ -55,6 +60,7 @@ bot.on('message', msg => {
   try {
     bot.commands.get(command).execute(msg, args);
   } catch (error) {
+    console.log('here1')
     console.error(error);
     msg.reply('there was an error trying to execute that command!');
   }
@@ -62,4 +68,4 @@ bot.on('message', msg => {
 
 
 
-bot.login('ODAyMzQxOTQzNTM5MjY5NjYz.YAt1Kg.moIwJ1j-pYiJS-ZeNhqQMle61Ok');
+bot.login('ODAyMzQxOTQzNTM5MjY5NjYz.YAt1Kg.WL4F_CyC4nRkrcOb5s51vrPnVFk');
