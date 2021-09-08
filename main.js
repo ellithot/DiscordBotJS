@@ -6,54 +6,87 @@ const botCommands = commands.test1
 const { HLTV } = require('hltv')
 const fs = require('fs')
 
-
+const liveTeamFile = 'C:/Users/ellio/discord_bot/currentlylive.json'
 const hltvConfigFile = 'C:/Users/ellio/discord_bot/commands/hltvconfig.json'
 var numEntries = 0
 
+
+
+
+
+
 bot.on('ready', () => {
+  var requestLoop = setInterval(function () {
+    HLTV.getMatches().then((res) => {
 
-  HLTV.getMatches().then((res) => {
+      console.log(res)
+      var liveMatches = []
 
-    console.log(res)
-    liveMatches = []
+      for (i = 0; i < res.length; i++) {
 
-    for (i = 0; i < res.length; i++) {
+        if (res[i].live == true) {
 
-      if (res[i].live == true) {
+          var team1 = res[i].team1.id
+          var team2 = res[i].team2.id
 
-        liveTeams = {}
-        var team1 = res[i].team1.id
-        var team2 = res[i].team2.id
-        var rawData = fs.readFileSync(hltvConfigFile, "utf8")
-        var stringObject = JSON.parse(rawData)
-        console.log(stringObject[team1])
-        
+          liveMatches.push(team1)
+          liveMatches.push(team2)
 
-        if (stringObject[team1] != undefined) {
-          numEntries = stringObject[team1].length
-          if (numEntries > 1) {
-            for (i = 0; i < 2; i++) {
-              bot.channels.cache.get(stringObject[team1][i].toString()).send(`Yahoo!`)
+          var rawData = fs.readFileSync(hltvConfigFile, "utf8")
+          var liveData = fs.readFileSync(liveTeamFile, "utf8")
+
+          var liveObject = JSON.parse(liveData)
+          var stringObject = JSON.parse(rawData)
+
+          console.log(team1)
+          console.log(stringObject[team1])
+
+          var team1Link = 'https://www.hltv.org/team/' + res[i].team1.id + '/' + res[i].team1.name
+          var team2Link = 'https://www.hltv.org/team/' + res[i].team2.id + '/' + res[i].team2.name
+
+          if (stringObject[team1] != undefined && !liveObject.liveTeams.contains(team1)) {
+
+            numEntries = stringObject[team1].subscribedChannels.length
+
+            if (numEntries > 1) {
+
+              for (i = 0; i < 2; i++) {
+                bot.channels.cache.get(stringObject[team1].subscribedChannels[i].toString()).send(stringObject[team1].teamName + " are currently live! You can view them here: " + team1Link)
+              }
+
+            } else {
+
+              bot.channels.cache.get(stringObject[team1].subscribedChannels[0].toString()).send(stringObject[team1].teamName + " are currently live! You can view them here: " + team1Link)
             }
-          } else {
-            bot.channels.cache.get(stringObject[team1][0].toString()).send(`Yahoo!`)
+
           }
+
+          if (stringObject[team2] != undefined && !liveObject.liveTeams.contains(team2)) {
+
+            numEntries = stringObject[team2].subscribedChannels.length
+
+            if (numEntries > 1) {
+
+              for (i = 0; i < 2; i++) {
+                bot.channels.cache.get(stringObject[team2].subscribedChannels[i].toString()).send(stringObject[team2].teamName + " are currently live! You can view them here: " + team2Link)
+              }
+
+            } else {
+
+              bot.channels.cache.get(stringObject[team2].subscribedChannels[0].toString()).send(stringObject[team2].teamName + " are currently live! You can view them here: " + team2Link)
+            }
+          }
+
         }
-
       }
-    }
-  })
+
+      liveObject.liveTeams = liveMatches
+      fs.writeFileSync(liveTeamFile, JSON.stringify(liveObject))
+
+    })
+
+  }, 600000);
 })
-
-
-var requestLoop = setInterval(function () {
-  HLTV.getMatches().then((res) => {
-    console.log(res)
-    for (i = 0; i < res.length; i++) {
-      //pass
-    }
-  })
-}, 600000);
 
 
 

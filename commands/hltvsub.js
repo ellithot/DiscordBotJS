@@ -1,8 +1,6 @@
 const { HLTV } = require('hltv')
-fs = require('fs')
+const fs = require('fs')
 var name = 'C:/Users/ellio/discord_bot/commands/hltvconfig.json'
-const util = require('util');
-
 
 module.exports = {
 
@@ -26,21 +24,28 @@ module.exports = {
 
                 function (res) {
 
-                    teamId = res.id
-                    teamName = res.name
-                    teamConfig = []
-                    rawData = fs.readFileSync(name, "utf8")
+                    var tempObject = {}
+                    var teamId = res.id
+                    var teamName = res.name
+                    var teamConfig = []
+                    var rawData = fs.readFileSync(name, "utf8")
                     stringObject = JSON.parse(rawData)
                     if(stringObject[teamId] != undefined) {
-                        teamConfig = stringObject[teamId]
+                        teamConfig = stringObject[teamId].subscribedChannels
+
                     } else {
                         teamConfig = []
+                        tempObject.currentlyLive = false
                     }
                     if(!teamConfig.includes(msg.channel.id)) {
                         teamConfig.push(msg.channel.id)
                     }
                     //serverConfigs[msg.guild.id] = teamConfig
-                    stringObject[teamId] = teamConfig
+                    tempObject.subscribedChannels = teamConfig
+                    if (tempObject.teamName == undefined) {
+                        tempObject.teamName = teamName
+                    }
+                    stringObject[teamId] = tempObject
                     fs.writeFileSync(name, JSON.stringify(stringObject))
                     msg.channel.send('You will now receive updates for ' + teamName + '.')
 
