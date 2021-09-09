@@ -46,7 +46,7 @@ module.exports = {
                         tempObject.teamName = teamName
                     }
                     stringObject[teamId] = tempObject
-                    fs.writeFileSync(name, JSON.stringify(stringObject))
+                    fs.writeFileSync(name, JSON.stringify(stringObject, null, "\t"))
                     msg.channel.send('You will now receive updates for ' + teamName + '.')
 
                 },

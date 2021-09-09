@@ -38,12 +38,15 @@ bot.on('ready', () => {
           var liveObject = JSON.parse(liveData)
           var stringObject = JSON.parse(rawData)
 
-          console.log('cycle')
 
-          var team1Link = 'https://www.hltv.org/team/' + res[i].team1.id + '/' + res[i].team1.name
-          var team2Link = 'https://www.hltv.org/team/' + res[i].team2.id + '/' + res[i].team2.name
+          var team1Link = 'https://www.hltv.org/team/' + res[i].team1.id + '/' + res[i].team1.name.replace(' ', '-')
+          var team2Link = 'https://www.hltv.org/team/' + res[i].team2.id + '/' + res[i].team2.name.replace(' ', '-')
 
-          if (stringObject[team1] != undefined && !liveObject.liveTeams.contains(team1)) {
+          var liveArray = liveObject.liveTeams
+
+
+          if (stringObject[team1] != undefined && liveArray.indexOf(team1) == -1) {
+
 
             numEntries = stringObject[team1].subscribedChannels.length
 
@@ -60,7 +63,8 @@ bot.on('ready', () => {
 
           }
 
-          if (stringObject[team2] != undefined && !liveObject.liveTeams.contains(team2)) {
+          if (stringObject[team2] != undefined && liveArray.indexOf(team2) == -1) {
+
 
             numEntries = stringObject[team2].subscribedChannels.length
 
