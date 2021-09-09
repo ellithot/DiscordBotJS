@@ -38,8 +38,7 @@ bot.on('ready', () => {
           var liveObject = JSON.parse(liveData)
           var stringObject = JSON.parse(rawData)
 
-          console.log(team1)
-          console.log(stringObject[team1])
+          console.log('cycle')
 
           var team1Link = 'https://www.hltv.org/team/' + res[i].team1.id + '/' + res[i].team1.name
           var team2Link = 'https://www.hltv.org/team/' + res[i].team2.id + '/' + res[i].team2.name
