@@ -1,4 +1,5 @@
-node_modules/hltvconfig.json
+commands/hltvconfig.json
+currentlylive.json
 
 # Logs
 logs

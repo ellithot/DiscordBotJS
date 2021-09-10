@@ -19,7 +19,6 @@ bot.on('ready', () => {
   var requestLoop = setInterval(function () {
     HLTV.getMatches().then((res) => {
 
-      console.log(res)
       var liveMatches = []
 
       for (i = 0; i < res.length; i++) {
@@ -38,12 +37,13 @@ bot.on('ready', () => {
           var liveObject = JSON.parse(liveData)
           var stringObject = JSON.parse(rawData)
 
+          var team1Name = res[i].team1.name
+          var team2Name = res[i].team2.name
 
-          var team1Link = 'https://www.hltv.org/team/' + res[i].team1.id + '/' + res[i].team1.name.replace(' ', '-')
-          var team2Link = 'https://www.hltv.org/team/' + res[i].team2.id + '/' + res[i].team2.name.replace(' ', '-')
+          var team1Link = 'https://www.hltv.org/team/' + res[i].team1.id + '/' + team2Name.replace(' ', '-')
+          var team2Link = 'https://www.hltv.org/team/' + res[i].team2.id + '/' + team2Name.replace(' ', '-')
 
           var liveArray = liveObject.liveTeams
-
 
           if (stringObject[team1] != undefined && liveArray.indexOf(team1) == -1) {
 
@@ -53,12 +53,12 @@ bot.on('ready', () => {
             if (numEntries > 1) {
 
               for (i = 0; i < 2; i++) {
-                bot.channels.cache.get(stringObject[team1].subscribedChannels[i].toString()).send(stringObject[team1].teamName + " are currently live! You can view them here: " + team1Link)
+                bot.channels.cache.get(stringObject[team1].subscribedChannels[i].toString()).send(stringObject[team1].teamName + " are currently live, playing " + team2Name + "! You can view them here: " + team1Link)
               }
 
             } else {
 
-              bot.channels.cache.get(stringObject[team1].subscribedChannels[0].toString()).send(stringObject[team1].teamName + " are currently live! You can view them here: " + team1Link)
+              bot.channels.cache.get(stringObject[team1].subscribedChannels[0].toString()).send(stringObject[team1].teamName + " are currently live, playing " + team2Name + "! You can view them here: " + team1Link)
             }
 
           }
@@ -71,12 +71,12 @@ bot.on('ready', () => {
             if (numEntries > 1) {
 
               for (i = 0; i < 2; i++) {
-                bot.channels.cache.get(stringObject[team2].subscribedChannels[i].toString()).send(stringObject[team2].teamName + " are currently live! You can view them here: " + team2Link)
+                bot.channels.cache.get(stringObject[team2].subscribedChannels[i].toString()).send(stringObject[team2].teamName + " are currently live, playing " + team1Name + "! You can view them here: " + team2Link)
               }
 
             } else {
 
-              bot.channels.cache.get(stringObject[team2].subscribedChannels[0].toString()).send(stringObject[team2].teamName + " are currently live! You can view them here: " + team2Link)
+              bot.channels.cache.get(stringObject[team2].subscribedChannels[0].toString()).send(stringObject[team2].teamName + " are currently live, playing " + team1Name + "! You can view them here: " + team2Link)
             }
           }
 
