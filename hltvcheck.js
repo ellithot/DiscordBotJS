@@ -1,10 +1,12 @@
 const { HLTV } = require('hltv')
+const fs = require('fs')
+
 
 const liveTeamFile = 'C:/Users/ellio/discord_bot/currentlylive.json'
 const hltvConfigFile = 'C:/Users/ellio/discord_bot/commands/hltvconfig.json'
 var numEntries = 0
 
-module.exports = function () {
+module.exports = function(bot) {
     var requestLoop = setInterval(function () {
         HLTV.getMatches().then((res) => {
 

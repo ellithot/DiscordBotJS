@@ -17,7 +17,7 @@ var numEntries = 0
 
 
 bot.on('ready', () => {
-  hltvCheck()
+  hltvCheck(bot)
 })
 
 
