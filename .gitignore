@@ -1,4 +1,9 @@
-*.json
+# Config files
+currentlylive.json
+hltvconfig.json
+
+# TTS files
+*.ogg
 
 
 # Logs

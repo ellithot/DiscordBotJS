@@ -54,4 +54,4 @@ bot.on('message', msg => {
 
 
 
-bot.login('ODAyMzQxOTQzNTM5MjY5NjYz.YAt1Kg.WL4F_CyC4nRkrcOb5s51vrPnVFk');
+bot.login(process.env.API_KEY);
