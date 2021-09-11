@@ -4,28 +4,15 @@ const bot = new Discord.Client()
 bot.commands = new Discord.Collection()
 const commands = require('./command')
 const botCommands = commands.test1
-const fs = require('fs')
 
 const hltvCheck = require('./hltvcheck')
-
-const liveTeamFile = 'C:/Users/ellio/discord_bot/currentlylive.json'
-const hltvConfigFile = 'C:/Users/ellio/discord_bot/commands/hltvconfig.json'
-var numEntries = 0
-
-
-
-
 
 
 bot.on('ready', () => {
   hltvCheck(bot)
 })
 
-
-
-var likeData
-
-test = Object.keys(botCommands).map(key => {
+Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key])
 });
 
