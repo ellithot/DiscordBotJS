@@ -10,11 +10,11 @@ test1 = {
     Hltvsub: require('./commands/hltvsub')
 };
 
-module.exports.test1 = test1;
-listOfCommands = Object.entries(test1);
+module.exports.test1 = test1
+listOfCommands = Object.entries(test1)
 for (i = 0; i < listOfCommands.length; i++) {
-    fullList.push(Object.entries(listOfCommands[i][1])[0][1]);
-    fullList.push(Object.entries(listOfCommands[i][1])[1][1]);
+    fullList.push(Object.entries(listOfCommands[i][1])[0][1])
+    fullList.push(Object.entries(listOfCommands[i][1])[1][1])
     fullList.push(Object.entries(listOfCommands[i][1])[2][1])
 };
 module.exports.fullList = fullList
