@@ -83,8 +83,10 @@ bot.on('ready', () => {
         }
       }
 
-      liveObject.liveTeams = liveMatches
-      fs.writeFileSync(liveTeamFile, JSON.stringify(liveObject))
+      if (liveObject != undefined) {
+        liveObject.liveTeams = liveMatches
+        fs.writeFileSync(liveTeamFile, JSON.stringify(liveObject, null, "\t"))
+      }
 
     })
 

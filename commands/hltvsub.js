@@ -35,7 +35,6 @@ module.exports = {
 
                     } else {
                         teamConfig = []
-                        tempObject.currentlyLive = false
                     }
                     if(!teamConfig.includes(msg.channel.id)) {
                         teamConfig.push(msg.channel.id)
