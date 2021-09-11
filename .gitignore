@@ -4,7 +4,7 @@ hltvconfig.json
 
 # TTS files
 *.ogg
-
+TTS.js
 
 # Logs
 logs
