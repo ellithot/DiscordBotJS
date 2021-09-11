@@ -12,6 +12,7 @@
     "@discordjs/opus": "^0.5.0",
     "axios": "^0.21.1",
     "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
     "google-tts-api": "^2.0.2",
     "graceful-fs": "^4.2.6",
     "hltv": "^3.3.3",
