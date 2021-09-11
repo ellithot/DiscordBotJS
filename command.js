@@ -16,5 +16,5 @@ for (i = 0; i < listOfCommands.length; i++) {
     fullList.push(Object.entries(listOfCommands[i][1])[0][1])
     fullList.push(Object.entries(listOfCommands[i][1])[1][1])
     fullList.push(Object.entries(listOfCommands[i][1])[2][1])
-};
+}
 module.exports.fullList = fullList
